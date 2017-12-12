@@ -1,0 +1,9 @@
+[package]
+name = "dotchaff"
+version = "0.0.1"
+authors = ["Mikhail Gusarov <dottedmag@dottedmag.net>"]
+
+[dependencies]
+regex = "0.2"
+lazy_static = "1.0.0"
+walkdir = "2"
