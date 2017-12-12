@@ -2,6 +2,7 @@
 name = "dotchaff"
 version = "0.0.1"
 authors = ["Mikhail Gusarov <dottedmag@dottedmag.net>"]
+license = "ISC"
 
 [dependencies]
 regex = "0.2"
