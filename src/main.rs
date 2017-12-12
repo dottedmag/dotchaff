@@ -50,10 +50,8 @@ fn read_config(path: &Path) -> Config {
         }
         match current_target {
             Some(ref target) => {
-                if !config.contains_key(target) {
-                    config.insert(target.clone(), Vec::new());
-                }
-                config.get_mut(target).unwrap().push(line);
+                let v = config.entry(target.clone()).or_insert(Vec::new());
+                v.push(line);
             },
             None => panic!("{}: line '{}' with no target", path.display(), line)
         };
@@ -65,11 +63,9 @@ fn merge_configs(configs: Vec<Config>) -> Config {
     let mut ret_config = Config::new();
     for config in configs {
         for (target, lines) in config {
-            if !ret_config.contains_key(&target) {
-                ret_config.insert(target.clone(), Vec::new());
-            }
+            let v = ret_config.entry(target.clone()).or_insert(Vec::new());
             for line in lines {
-                ret_config.get_mut(&target).unwrap().push(line);
+                v.push(line);
             }
         }
     }
