@@ -58,7 +58,7 @@ fn read_config(path: &Path) -> Config {
             None => panic!("{}: line '{}' with no target", path.display(), line)
         };
     }
-    return config;
+    config
 }
 
 fn merge_configs(configs: Vec<Config>) -> Config {
@@ -73,7 +73,7 @@ fn merge_configs(configs: Vec<Config>) -> Config {
             }
         }
     }
-    return ret_config;
+    ret_config
 }
 
 fn prepare_matcher(config: Config) -> Matcher {
@@ -90,7 +90,7 @@ fn prepare_matcher(config: Config) -> Matcher {
         let rs = RegexSet::new(&lines).unwrap();
         matcher.insert(target.clone(), MatchSet { set: rs, rxs: rxs });
     }
-    return matcher;
+    matcher
 }
 
 fn fn_cmp(a: &DirEntry, b: &DirEntry) -> Ordering {
@@ -106,7 +106,7 @@ fn match_len(path: &str, ms: &MatchSet) -> Option<usize> {
             }
         }
     }
-    return if longest > 0 { Some(longest) } else { None };
+    if longest > 0 { Some(longest) } else { None }
 }
 
 fn do_match2(path: &str, matcher: &Matcher) -> Result<String, HashSet<String>> {
@@ -124,9 +124,9 @@ fn do_match2(path: &str, matcher: &Matcher) -> Result<String, HashSet<String>> {
         }
     }
     if longest_targets.len() == 1 {
-        return Ok(longest_targets.iter().next().unwrap().clone());
+        Ok(longest_targets.iter().next().unwrap().clone())
     } else {
-        return Err(longest_targets)
+        Err(longest_targets)
     }
 }
 
